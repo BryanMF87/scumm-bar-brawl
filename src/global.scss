@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'onesize';
+    src: url(./fonts/ONESIZE_.TTF) format('truetype');
+}
+
+
+$miLightPurple: #D99CFF;
+$miDarkPurple: #A55A9F;
+$miGreen: #62C859;
+$miRed: #DC3235;
+$miYellow: #F9B53B;
+
+:root {
+    font-family: 'onesize', sans-serif;
+}
+    li {
+        list-style: none;
+    }
+
+// PlayScreen styling
+
+.icon-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    color: white;
+    padding: 0;
+
+    li {
+        font-size: large;
+
+        &:hover {
+            color: $miLightPurple;
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    // border: 3px solid #00d320;
+}
+
+.character-section {
+    background-image: url('./images/bar-inside.png');
+    background-repeat: no-repeat;
+    background-size: 200%;
+    background-position: 10% 90%;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: center;
+    // border: 3px solid blue;
+}
+
+.text-box {
+    text-align: center;
+    font-size: 18px;
+    max-width: 60%;
+    margin: 0 auto 10px auto;
+    color: $miGreen;
+    text-shadow:    2px 2px 0 #000,
+                    -2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px -2px 0 #000;
+    // border: 3px solid yellow;
+}
+
+.sprites {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 65%;
+    // border: 3px solid red;
+}
+
+.dialogue-box {
+    background: black;
+    color: $miDarkPurple;
+    padding: .5rem;
+    // border: 3px solid pink;
+    height: 40%;
+}
+    p {
+        text-align: center;
+        padding: 0;
+        margin: 0 0 .5rem 0;
+    }
+
+    ul {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    li {
+        font-size: 18px;
+
+        &:hover {
+            color: $miLightPurple;
+        }
+    }
+
