@@ -1,21 +1,36 @@
-// import insultOptions from '../../insultOptions';
+import { useState } from 'react';
+import insultList from './insultList';
+import { FaSkull } from 'react-icons/fa';
+import { Value } from 'sass';
 
-const DialogueBox = () => {
+const DialogueBox = ({message, setMessage}) => {
+
+    let insultArray = [];
+    let insultOptions;
+
+    const getInsultOptions = () => {
+        while(insultArray.length < 4) {
+            // pull random insult from list
+            let randomInsult = insultList[Math.floor(Math.random() * insultList.length)];
+            // // add insult to array if not in array already
+            !insultArray.includes(randomInsult.insult) && insultArray.push(randomInsult.insult);
+        }
+
+        console.log(insultArray)
+
+        insultOptions = insultArray.map(option => {
+            return <li><FaSkull/>{option}</li>
+        })
+    }
+
+    getInsultOptions();
 
     return (
         <div className='dialogue-box'>
             <p>Insult LeChuck</p>
-            <ul className='insult-options'>
-                <li>Look behind you, a three-headed monkey!</li>
-                <li>I... am your brother!</li>
-                <li>There are no words for how disgusting you are.</li>
-                <li>I’ve spoken with apes more polite than you!</li>
-            </ul>
+            <ul className='insult-options'>{insultOptions}</ul>
         </div>
     )
-
-    // let randomInsult = insultOptions[Math.floor(Math.random() * insultOptions.length)]
-    // console.log(randomInsult);
 
     // let randomRetort = randomInsult.retort[Math.floor(Math.random() * randomInsult.retort.length)]
     // console.log(randomRetort)
