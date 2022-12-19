@@ -1,39 +1,36 @@
 import { useState } from 'react';
 import insultList from './insultList';
 import { FaSkull } from 'react-icons/fa';
-import { Value } from 'sass';
 
-const DialogueBox = ({message, setMessage}) => {
+const DialogueBox = () => {
 
-    let insultArray = [];
-    let insultOptions;
+    // let insultArray = [];
+    // let insultOptions;
 
-    const getInsultOptions = () => {
-        while(insultArray.length < 4) {
-            // pull random insult from list
-            let randomInsult = insultList[Math.floor(Math.random() * insultList.length)];
-            // // add insult to array if not in array already
-            !insultArray.includes(randomInsult.insult) && insultArray.push(randomInsult.insult);
-        }
+    // const getInsultOptions = () => {
+    //     while(insultArray.length < 4) {
+    //         // pull random insult from list
+    //         let randomInsult = insultList[Math.floor(Math.random() * insultList.length)];
+    //         // add unique insult to array
+    //         !insultArray.includes(randomInsult) && insultArray.push(randomInsult);
+    //     }
+    //     // map to component
+    //     insultOptions = insultArray.map(option => {
+    //         return <li key ={option.id}><FaSkull/>{option.insult}</li>
+    //     })
+    // }
 
-        console.log(insultArray)
+    // getInsultOptions();
 
-        insultOptions = insultArray.map(option => {
-            return <li><FaSkull/>{option}</li>
-        })
-    }
+    // return (
+    //     <div className='dialogue-box'>
+    //         <p>Insult LeChuck</p>
+    //         <ul className='insult-options'>{insultOptions}</ul>
+    //     </div>
+    // )
 
-    getInsultOptions();
-
-    return (
-        <div className='dialogue-box'>
-            <p>Insult LeChuck</p>
-            <ul className='insult-options'>{insultOptions}</ul>
-        </div>
-    )
-
-    // let randomRetort = randomInsult.retort[Math.floor(Math.random() * randomInsult.retort.length)]
-    // console.log(randomRetort)
+    // // let randomRetort = randomInsult.retort[Math.floor(Math.random() * randomInsult.retort.length)]
+    // // console.log(randomRetort)
 }
 
 export default DialogueBox
