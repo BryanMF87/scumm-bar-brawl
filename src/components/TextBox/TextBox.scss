@@ -1,0 +1,18 @@
+.text-box {
+    text-align: center;
+    font-size: 18px;
+    max-width: 60%;
+    margin: 0 auto 10px auto;
+    text-shadow:    2px 2px 0 #000,
+                    -2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px -2px 0 #000;
+}
+
+.guybrush {
+    color: white;
+}
+
+.pirate {
+    color: $miGreen;
+}

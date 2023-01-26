@@ -3,7 +3,7 @@ import './global.scss';
 // import components
 import StartScreen from './pages/StartScreen';
 import PlayScreen from './pages/PlayScreen';
-import SubScreen from './components/MenuScreen';
+import SubScreen from './pages/MenuScreen';
 
 
 const App = () => {

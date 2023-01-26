@@ -1,9 +1,7 @@
 import { useState } from 'react';
 // import components
-import MenuScreen from '../components/MenuScreen';
+import MenuScreen from './MenuScreen';
 import IconMenu from '../components/IconMenu';
-import Guy from '../components/Guy';
-import LeChuck from '../components/LeChuck';
 import TextBox from '../components/TextBox';
 import DialogueBox from '../components/DialogueBox';
 
@@ -27,13 +25,9 @@ const PlayScreen = () => {
                     <TextBox
                         message={message}
                     />
-                    <div className='sprites'>
-                        <Guy/>
-                        <LeChuck/>
-                    </div>
+                    <div className='sprites'></div>
                 </div>
                 <DialogueBox
-                    message={message}
                     setMessage={setMessage}
                 />
             </div>
