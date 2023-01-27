@@ -1,8 +1,14 @@
-const TextBox = ({message}) => {
+const TextBox = ({turn, message}) => {
+  
+let speaker;
+
+turn === 0 
+  ? speaker = 'text-box guybrush'
+  : speaker = 'text-box pirate';
 
   return (
     <>
-      <div className='text-box guybrush'>{message}</div>
+      <div className={speaker}>{message}</div>
     </>
   )
 }

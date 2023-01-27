@@ -9,6 +9,7 @@ const PlayScreen = () => {
 
     const [menuScreen, setMenuScreen] = useState('');
     const [message, setMessage] = useState('');
+    const [turn, setTurn] = useState(0);
 
     return (
         <div>
@@ -23,11 +24,14 @@ const PlayScreen = () => {
             <div className='wrapper'>
                 <div className='character-section'>
                     <TextBox
+                        turn={turn}
                         message={message}
                     />
                     <div className='sprites'></div>
                 </div>
                 <DialogueBox
+                    turn={turn}
+                    setTurn={setTurn}
                     setMessage={setMessage}
                 />
             </div>

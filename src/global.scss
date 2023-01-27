@@ -3,7 +3,6 @@
     src: url(./fonts/ONESIZE_.TTF) format('truetype');
 }
 
-
 $miLightPurple: #D99CFF;
 $miDarkPurple: #A55A9F;
 $miGreen: #62C859;
@@ -141,7 +140,7 @@ $miYellow: #F9B53B;
 }
 
 .pirate {
-    color: $miGreen;
+    color: $miGreen !important;
 }
 
 .sprites {
