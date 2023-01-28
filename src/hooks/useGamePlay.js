@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDialogue from "./useDialogue";
 
 const useGameplay = () => {
@@ -8,17 +8,29 @@ const useGameplay = () => {
     const [message, setMessage] = useState('');
     const [turn, setTurn] = useState(0);
 
-    const openingSequence = () => {
-        setMessage('Oh Jeez, not you again!')
-        setTimeout(()=> {
-            setTurn(1)
-            setMessage('You were expecting someone else?')
-        }, 2000);
-        setTimeout(()=> {
-            setTurn(0)
-            // getDialogue()
-        }, 4000);
-    };
+    async function openingSequence {
+        
+    }
+
+    openingSequence
+        .then(() => {
+            setTimeout(()=> {
+                setMessage('Oh Jeez, not you again!')
+            }, 1000)
+        })
+        .then(() => {
+            setTimeout(()=> {
+                setTurn(1)
+                setMessage('You were expecting someone else?')
+            }, 3000);
+        })
+        .then(() => {
+            setTimeout(()=> {
+                setMessage('')
+                setTurn(0)
+                // getDialogue()
+            }, 3000);
+        });
 
     return {
         message,
