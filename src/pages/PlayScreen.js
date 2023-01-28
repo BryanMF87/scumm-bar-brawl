@@ -4,12 +4,12 @@ import MenuScreen from './MenuScreen';
 import IconMenu from '../components/IconMenu';
 import TextBox from '../components/TextBox';
 import DialogueBox from '../components/DialogueBox';
+import useGamePlay from '../hooks/useGamePlay';
 
 const PlayScreen = () => {
 
     const [menuScreen, setMenuScreen] = useState('');
-    const [message, setMessage] = useState('');
-    const [turn, setTurn] = useState(0);
+    const {turn, message, setMessage} = useGamePlay();
 
     return (
         <div>
@@ -31,7 +31,6 @@ const PlayScreen = () => {
                 </div>
                 <DialogueBox
                     turn={turn}
-                    setTurn={setTurn}
                     setMessage={setMessage}
                 />
             </div>
