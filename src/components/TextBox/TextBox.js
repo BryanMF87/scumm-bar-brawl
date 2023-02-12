@@ -1,8 +1,8 @@
-const TextBox = ({turn, message}) => {
+const TextBox = ({playerTurn, message}) => {
   
 let speaker;
 
-turn === 0 
+playerTurn
   ? speaker = 'text-box guybrush'
   : speaker = 'text-box pirate';
 
