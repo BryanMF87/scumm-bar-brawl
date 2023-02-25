@@ -4,6 +4,7 @@ import MenuScreen from './MenuScreen';
 import IconMenu from '../components/IconMenu';
 import TextBox from '../components/TextBox/TextBox';
 import DialogueBox from '../components/DialogueBox';
+
 // import list arrays
 import insultList from '../insultList';
 import lameResponses from '../lameResponses';
@@ -16,22 +17,62 @@ const PlayScreen = () => {
     const [currentInsult, setCurrentInsult] = useState(null);
     const [currentResponse, setCurrentResponse] = useState(null);
     const [correctResponse, setCorrectResponse] = useState(null);
+    const [dialogue, setDialogue] = useState([]);
 
-    let guybrushWinArray = [];
-    let pirateWinArray = [];
 
-    const getCorrectResponse = () => {
-        // fires automatically when currentInsult has a value
-        setCorrectResponse(insultList.find(item => item.insult === currentInsult).response);
+    const wait = ms => 
+        new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, ms);
+        });
+
+    // Sequences
+
+    const openingSequence = async () => {
+        setMessage('Oh jeez, not you again!');
+        // guybrushTalks('oh jeez, not you again!')
+        await wait(1000)
+
+        setPlayerTurn('pirate');
+        setMessage('You were expecting someone else?');
+        // pirateTalks('You were expecting someone else?')
+        await wait(3500)
+
+        setMessage('');
+        setPlayerTurn(true);
+        await wait(2000);
+
+        battleSequence();
     };
 
-    const guybrushWinsGame = () => {
-        console.log('Guybrush won the game');
+    
+    const battleSequence = async () => {
+        playerTurn
+            ? guybrushInsults()
+            : pirateInsults();
+        await wait(2500);
+
+        playerTurn
+            ? guybrushResponds()
+            : pirateResponds();
+        await wait(4500)
+
+        playerTurn === 0 && currentResponse === correctResponse 
+        || playerTurn === 1 && currentResponse !== correctResponse
+            ? guybrushWinsRound()
+            : pirateWinsRound();
+        await wait(500)
+
+        guybrushScore === 3 
+            ? guybrushWinsGame()
+            : pirateScore === 3 
+                ? pirateWinsGame()
+                : newRound();
     };
 
-    const pirateWinsGame = () => {
-        console.log('Pirate won the game');
-    };
+
+    // Game functions
 
     const newRound = (outcome) => {
         console.log('Start a new round!');
@@ -39,43 +80,91 @@ const PlayScreen = () => {
         setCurrentResponse(null);
         setCorrectResponse(null);
         setMessage('')
-
-        setTimeout(()=> {
-            setPlayerTurn(outcome);
-        }, 1000)
-    }
-
-    const guybrushWinsRound = () => {
-        console.log('guybrush won the round');
-        guybrushWinArray.push('x');
-        guybrushWinArray === ['x', 'x', 'x']
-            ? guybrushWinsGame()
-            : newRound('true');
-    };
-
-    const pirateWinsRound = () => {
-        console.log('pirate won the round');
-        pirateWinArray.push('x');
-        pirateWinArray === ['x', 'x', 'x']
-            ? pirateWinsGame()
-            : newRound('false');
+        setPlayerTurn(outcome);
+        console.log(`player turn is ${playerTurn}`)
     };
 
     const checkRoundWinner = () => {
         console.log('checked round winner');
 
-        currentResponse === correctResponse
-            ? playerTurn && guybrushWinsRound()
-            : !playerTurn && pirateWinsRound();
+            playerTurn 
+                ? currentResponse === correctResponse 
+                    && guybrushWinsRound()
+                : currentResponse !== correctResponse
+                    && pirateWinsRound();
 
-        currentResponse !== correctResponse
-            ? playerTurn && pirateWinsRound()
-            : !playerTurn && guybrushWinsRound();
+            !playerTurn 
+                ? currentResponse === correctResponse
+                    && pirateWinsRound()
+                : currentResponse !== correctResponse
+                    && guybrushWinsRound()
     };
 
-    const pirateInsult = () => {
-        console.log('pirate insult')
+    const handleClick = (e) => {
+        setDialogue([])
+        setMessage(e.target.innerHTML);
+        setCurrentInsult(e.target.innerHTML);
+        setTimeout(()=> {
+            setPlayerTurn(!playerTurn);
+        }, 3000);
+    };
+
+
+
+    // Guybrush Threepwood
+
+    const [guybrushScore, setGuybrushScore] = useState(0);
+
+    const guybrushWinsGame = () => {
+        console.log('Guybrush won the game');
+    };
+
+    const guybrushWinsRound = () => {
+        console.log('guybrush won the round');
+        setGuybrushScore(guybrushScore + 1);
+        guybrushScore === 3
+            ? guybrushWinsGame()
+            : newRound(true);
+    };
+
+    const guybrushInsults = () => {
+        console.log('guybrush insults');
+        const insultArray = insultList.sort(() => Math.random() - Math.random()).slice(0, 4);
+        let insultOptions = insultArray.map((option) => {
+            return <li key={option.insult} onClick={handleClick}>{option.insult}</li>;  
+        }); 
+        setDialogue(insultOptions);
+    };
+
+    const guybrushResponds = () => {
+        let responseArray = [];
+        console.log('guybrush responds');
+        // If insult has value, get 3 random responses & 1 correct response
+        responseArray = insultList.sort(() => Math.random() - Math.random()).slice(0, 3);
+    };
+
+
+    
+    // pirate
+
+    const [pirateScore, setPirateScore] = useState(0);
+
+    const pirateWinsGame = () => {
+        console.log('Pirate won the game');
+    };
+
+    const pirateWinsRound = () => {
+        console.log('pirate won the round');
+        setPirateScore(pirateScore + 1);
+        pirateScore === 3
+            ? pirateWinsGame()
+            : newRound(false);
+    };
+
+    const pirateInsults = () => {
+        console.log('pirate insults')
         let pirateChoice = insultList[Math.floor(Math.random()*insultList.length)].insult;
+        console.log(pirateChoice)
         setMessage(pirateChoice);
         setCurrentInsult(pirateChoice);
         setTimeout(()=> {
@@ -83,65 +172,48 @@ const PlayScreen = () => {
         }, 3000);
     }
 
-    const pirateRespond = () => {
+    const pirateResponds = async () => {
+        console.log('pirate responds')
         // Give pirate 50% chance of correct response
-        let correct = Math.random() < 0.5;
-        let outcome;
 
-        correct
-            // Correct response
-            ? outcome = correctResponse
-            // Wrong response
-            : outcome = lameResponses[Math.floor(Math.random()*insultList.length)];
+        let pirateResponse = Math.random() < 0.5;
 
-        setMessage(outcome);
-        setCurrentResponse(outcome);
+        console.log(`pirate's inital response parameter is ${pirateResponse}`);
+    
+        pirateResponse
+            ? pirateResponse = correctResponse
+            : pirateResponse = lameResponses.sort[0];
+
+
+        console.log(`pirate's response is ` + pirateResponse);
+        
+        setMessage(pirateResponse);
+        setCurrentResponse(pirateResponse);
 
         setTimeout(()=> {
             checkRoundWinner();
         }, 2000);
     };
 
-    const pirateActions = () => {
-        !currentInsult
-            ? pirateInsult()
-            : pirateRespond()
-    };
 
-    useEffect(()=> {
-        !playerTurn && pirateActions(); 
-        console.log(playerTurn)
-    }, [playerTurn]);
+
+    // helper functions
+
     
 
-
-    const openingSequence = () => {
-        setTimeout(()=> {
-            setMessage('Oh Jeez, not you again!');
-        }, 1000);
-
-        setTimeout(()=> {
-            setPlayerTurn('pirate');
-            setMessage('You were expecting someone else?');
-        }, 3500);
-
-        setTimeout(()=> {
-            setMessage('');
-            setPlayerTurn(true);
-        }, 5500);
+    const getCorrectResponse = () => {
+        setCorrectResponse(insultList.find(item => item.insult === currentInsult).response);
     };
 
-
-
-    // Automatically get the correct response to currentInsult
     useEffect(()=> {
         currentInsult && getCorrectResponse();
     }, [currentInsult]);
 
     // Play this first before gameplay starts
-    // useEffect(()=> {
-    //     // openingSequence();
-    // }, []);,
+    useEffect(()=> {
+        // openingSequence();
+        battleSequence();
+    }, []);
 
     return (
         <div>
@@ -162,17 +234,11 @@ const PlayScreen = () => {
                     <div className='sprites'></div>
                 </div>
                 <DialogueBox
-                    playerTurn={playerTurn}
-                    setPlayerTurn={setPlayerTurn}
-                    setMessage={setMessage}
-                    currentInsult={currentInsult}
-                    setCurrentInsult={setCurrentInsult}
-                    currentResponse={currentResponse}
-                    setCurrentResponse={setCurrentResponse}
+                    dialogue={dialogue}
                 />
             </div>
         </div>
     )
 }
 
-export default PlayScreen;
+export default PlayScreen
