@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react';
 // import components
 import MenuScreen from './MenuScreen';
 import IconMenu from '../components/IconMenu';
-import TextBox from '../components/TextBox/TextBox';
+import TextBox from '../components/TextBox';
+import Sprites from '../components/Sprites';
 import DialogueBox from '../components/DialogueBox';
-
 // import list arrays
 import insultList from '../insultList';
 import lameResponses from '../lameResponses';
+// import assets
+import scummBar from '../music/scumm-bar.mp3';
+import spritesStatic from '../images/sprites_static.png'
+import spritesFighting from '../images/sprites_fighting.mp4';
+
 
 const wait = ms => {
    return new Promise(resolve => {
@@ -17,9 +22,10 @@ const wait = ms => {
     });
 }
 
-const PlayScreen = () => {
+const PlayScreen = ({winner, setWinner}) => {
 
     const [menuScreen, setMenuScreen] = useState('');
+    const [gameStart, setGameStart] = useState(false);
     const [message, setMessage] = useState('');
     const [playerTurn, setPlayerTurn] = useState(true);
     const [currentInsult, setCurrentInsult] = useState(null);
@@ -28,50 +34,43 @@ const PlayScreen = () => {
     const [dialogue, setDialogue] = useState([]);
     const [playerScore, setPlayerScore] = useState(0);
     const [opponentScore, setOpponentScore] = useState(0);
-    const [winner, setWinner] = useState(null);
-
- 
+    const [animation, setAnimation] = useState(spritesFighting)
 
 
-    // const openingSequence = async () => {
-    //     setMessage('Oh jeez, not you again!');
-    //     // guybrushTalks('oh jeez, not you again!')
-    //     await wait(1000)
+    const openingSequence = async () => {
+        setMessage('Oh jeez, not you again!');
+        await wait(2500)
 
-    //     setPlayerTurn('pirate');
-    //     setMessage('You were expecting someone else?');
-    //     // pirateTalks('You were expecting someone else?')
-    //     await wait(3500)
+        setPlayerTurn(false);
+        setMessage('You were expecting someone else?');
+        await wait(2500)
 
-    //     setMessage('');
-    //     setPlayerTurn(true);
-    //     await wait(2000);  
-    // };
+        setMessage('');
+        setGameStart(true);
+        await wait(100);
 
-    let gameStart = true;
+        setPlayerTurn(true);
+    };
 
     useEffect(()=> {
-        if(playerTurn === true) {
-            playerAction()
-        } else if (playerTurn === null) {
-            return
-        } else if (playerTurn === false) {
-            opponentAction()
-        }
+        if(gameStart) {
+            if(playerTurn === true) {
+                playerAction()
+            } else if (playerTurn === null) {
+                return
+            } else if (playerTurn === false) {
+                opponentAction()
+            }
+        };
     }, [playerTurn]);
 
-    // I only need to add a player switch after insult & delay
-    // response should handle itself
 
     const playerAction = () => {
         let dialogueArray = [];
         let dialogueOptions;
 
-        console.log('player action');
-
         // Player attacks
         if(!currentInsult) { 
-            console.log('player attacks');
             dialogueArray = insultList.sort(() => Math.random() - Math.random()).slice(0, 4);
             dialogueOptions = dialogueArray.map((option) => {
                 return <li key={option.insult} onClick={handleClick}>{option.insult}</li>;  
@@ -79,7 +78,6 @@ const PlayScreen = () => {
 
         // Player defends
         } else if(!currentResponse) { 
-            console.log('player defends');
             dialogueArray.push(correctResponse);
 
            for(let i = 0; dialogueArray.length < 4; i++) {
@@ -87,10 +85,7 @@ const PlayScreen = () => {
                 if(wrongResponse !== correctResponse) {
                     dialogueArray.push(wrongResponse);
                 }
-                console.log(wrongResponse);
             };
-
-            console.log(dialogueArray);
 
             dialogueArray.sort();
             dialogueOptions = dialogueArray.map((option) => {
@@ -101,7 +96,6 @@ const PlayScreen = () => {
     };
 
     const handleClick = async (e) => {
-        console.log('player says ' + e.target.innerHTML)
         setDialogue([])
         setMessage(e.target.innerHTML);
         currentInsult
@@ -111,24 +105,19 @@ const PlayScreen = () => {
 
     const opponentAction = () => {
 
-        console.log('opponent action')
-
         // Opponent attacks
         if(!currentInsult) { 
-            console.log('opponent attacks')
             let opponentChoice = insultList[Math.floor(Math.random()*insultList.length)].insult;
             setMessage(opponentChoice);
             setCurrentInsult(opponentChoice);
 
         // Opponent Defends
         } else if(!currentResponse) {
-            console.log('opponent defends')
             // Give opponent 50% chance of correct response
             let opponentResponse = Math.random() < 0.5;
             opponentResponse
                 ? opponentResponse = correctResponse
                 : opponentResponse = lameResponses[Math.floor(Math.random() * lameResponses.length)];
-            console.log(`opponent's response is ` + opponentResponse);
             setMessage(opponentResponse);
             setCurrentResponse(opponentResponse);
         }
@@ -143,7 +132,6 @@ const PlayScreen = () => {
                 setPlayerTurn(!playerTurn);
             }, 2500);
         };
-        console.log('currentInsult is ' + currentInsult)
     }, [currentInsult]);
 
 
@@ -151,7 +139,6 @@ const PlayScreen = () => {
     useEffect(()=> {
         if (currentResponse) {
             setTimeout(()=>{
-                console.log('checking for winner')
                 // Player wins if they guess correct or pirate guesses wrong
                 if (currentResponse === correctResponse && playerTurn === true
                     || currentResponse !== correctResponse && playerTurn === false) {
@@ -164,34 +151,27 @@ const PlayScreen = () => {
                 }
             }, 2500);
         };
-        console.log('currentResponse is ' + currentResponse)
     }, [currentResponse]);
 
 
     useEffect(()=> {
-        console.log('player score is ' + playerScore);
-        console.log('opponent score is ' + opponentScore);
-
         if(playerScore > 0 || opponentScore > 0) {
             if(playerScore === 3) {
-                console.log('Player wins')
+                setMenuScreen('win')
             } else if (opponentScore === 3) {
-                console.log('Opponent wins')
+                setMenuScreen('win')
             } else {
                 newRound();
             };
         }
-
     }, [playerScore, opponentScore]);
 
     
     const newRound = async () => {
-        console.log('Start a new round!');
         setCurrentInsult(null);
         setCurrentResponse(null);
         setCorrectResponse(null);
         setMessage('');
-        setWinner(null);
 
         // Helps newRound start if defender and round winner are same person
         setPlayerTurn(null);
@@ -199,6 +179,12 @@ const PlayScreen = () => {
         setPlayerTurn(winner);
         setWinner(null);
     };
+
+    useEffect(()=> {
+        openingSequence();
+        let music = new Audio(scummBar).play();
+        music.loop = true;
+    }, []);
 
 
     return (
@@ -217,7 +203,9 @@ const PlayScreen = () => {
                         playerTurn={playerTurn}
                         message={message}
                     />
-                    <div className='sprites'></div>
+                    <Sprites 
+                        animation={animation}
+                    />
                 </div>
                 <DialogueBox
                     dialogue={dialogue}

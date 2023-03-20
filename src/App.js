@@ -3,21 +3,26 @@ import './global.scss';
 // import components
 import StartScreen from './pages/StartScreen';
 import PlayScreen from './pages/PlayScreen';
-import SubScreen from './pages/MenuScreen';
-
+import MenuScreen from './pages/MenuScreen';
 
 const App = () => {
   
   const [screen, setScreen] = useState('start');
+  const [winner, setWinner] = useState(null);
 
   return (
     <>
       <div className='content'>
-        <SubScreen />
+        <MenuScreen 
+          winner={winner}
+        />
         {screen === 'start' && (<StartScreen 
           onStartClick={() => setScreen('play')}
         />)}
-        {screen === 'play' && <PlayScreen/>}
+        {screen === 'play' && <PlayScreen
+          winner={winner}
+          setWinner={setWinner}
+        />}
       </div>
     </>
   );
