@@ -22,7 +22,7 @@ export const wait = ms => {
     });
 }
 
-const PlayScreen = ({winner, setWinner}) => {
+const PlayScreen = ({winner, setWinner, menuScreen, setMenuScreen}) => {
 
     const [gameStart, setGameStart] = useState(false);
     const [message, setMessage] = useState('');
@@ -34,7 +34,7 @@ const PlayScreen = ({winner, setWinner}) => {
     const [playerScore, setPlayerScore] = useState(0);
     const [opponentScore, setOpponentScore] = useState(0);
     const [animation, setAnimation] = useState(null);
-    const [menuScreen, setMenuScreen] = useState('');
+    
 
 
     const openingSequence = async () => {

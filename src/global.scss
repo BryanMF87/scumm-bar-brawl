@@ -199,7 +199,7 @@ $miYellow: #F9B53B;
 
 // MenuScreen stylings
 
-.intro-screen, .quit-screen, .info-screen, .credits-screen, .win-screen {
+.intro-screen, .quit-screen, .info-screen, .credits-screen, .win-screen, .error-screen {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -265,4 +265,8 @@ $miYellow: #F9B53B;
     h4 {
         max-width: 60%;
     }
+}
+
+.error-screen {
+    padding: 0 2rem;
 }

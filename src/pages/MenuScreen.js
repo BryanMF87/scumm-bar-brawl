@@ -3,6 +3,7 @@ import QuitScreen from './QuitScreen';
 import CreditsScreen from './CreditsScreen';
 import WinScreen from './WinScreen';
 import InfoScreen from './InfoScreen';
+import ErrorScreen from './ErrorScreen';
 
 const MenuScreen = ({menuScreen, setMenuScreen, playerScore}) => {
 
@@ -15,6 +16,8 @@ const MenuScreen = ({menuScreen, setMenuScreen, playerScore}) => {
         {menuScreen === 'win' && <WinScreen playerScore={playerScore}/>}
 
         {menuScreen === 'info' && <InfoScreen setMenuScreen={setMenuScreen}/>}
+
+        {menuScreen === 'error' && <ErrorScreen />}
     </div>
   )
 }
