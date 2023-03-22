@@ -2,8 +2,9 @@ import React from 'react';
 import QuitScreen from './QuitScreen';
 import CreditsScreen from './CreditsScreen';
 import WinScreen from './WinScreen';
+import InfoScreen from './InfoScreen';
 
-const MenuScreen = ({menuScreen, setMenuScreen, winner}) => {
+const MenuScreen = ({menuScreen, setMenuScreen, playerScore}) => {
 
   return (
     <div>
@@ -11,7 +12,9 @@ const MenuScreen = ({menuScreen, setMenuScreen, winner}) => {
 
         {menuScreen === 'credits' && <CreditsScreen setMenuScreen={setMenuScreen}/>}
 
-        {menuScreen === 'win' && <WinScreen winner={winner}/>}
+        {menuScreen === 'win' && <WinScreen playerScore={playerScore}/>}
+
+        {menuScreen === 'info' && <InfoScreen setMenuScreen={setMenuScreen}/>}
     </div>
   )
 }

@@ -76,10 +76,21 @@ $miYellow: #F9B53B;
         }
     }
 
-    button {
+    .button-n-text {
         display: flex;
-        justify-self: center;
-        align-self: center;
+        flex-direction: column;
+        justify-content: center;
+
+        button {
+            display: flex;
+            justify-self: center;
+            align-self: center;
+        }
+
+        p {
+            max-width: 300px;
+            margin: 1.5rem auto 0 auto;
+        }
     }
 }
 
@@ -115,16 +126,29 @@ $miYellow: #F9B53B;
 .character-section {
     background-image: url('./images/bar-inside.png');
     background-repeat: no-repeat;
-    background-size: 200%;
+    background-size: 230%;
     background-position: 10% 80%;
     width: 100%;
     height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    img {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        object-fit: contain;
+        width: 55%;
+        margin-bottom: -.5rem;
+    }
 }
 
 .text-box {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateY(-80%) translateX(-50%);
     text-align: center;
     font-size: 4.5vh;
     max-width: 60%;
@@ -143,25 +167,9 @@ $miYellow: #F9B53B;
     color: $miGreen !important;
 }
 
-.sprites {
-    width: 50%;
-    height: 60%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    // border: 1px solid yellow;
-    background-image: url('../src/images/sprites_static.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
-}
-
 .dialogue-box {
     background: black;
     color: $miDarkPurple;
-    
-    bottom: 0;
     width: 100%;
     height: 30%;
     font-size: 4.5vh;
@@ -170,7 +178,7 @@ $miYellow: #F9B53B;
 
     ul {
         margin: 0;
-        padding: 0 0 0 1rem;
+        padding: 0 0 0 2rem;
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -191,7 +199,7 @@ $miYellow: #F9B53B;
 
 // MenuScreen stylings
 
-.intro-screen, .quit-screen, .music-screen, .credits-screen, .win-screen {
+.intro-screen, .quit-screen, .info-screen, .credits-screen, .win-screen {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -226,13 +234,9 @@ $miYellow: #F9B53B;
     }
 }
 
-.music-screen {
-    h3 {
-        margin: 1rem auto .5rem auto;
-    }
-
-    button {
-        margin-top: 1.5rem;
+.info-screen {
+    p {
+        max-width: 600px;
     }
 }
 
@@ -244,6 +248,8 @@ $miYellow: #F9B53B;
     .logo {
         display: flex;
         flex-direction: column;
+        max-width: 400px;
+        object-fit: contain;
 
         img {
             width: 50%;

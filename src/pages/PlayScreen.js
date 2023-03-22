@@ -3,18 +3,18 @@ import { useState, useEffect } from 'react';
 import MenuScreen from './MenuScreen';
 import IconMenu from '../components/IconMenu';
 import TextBox from '../components/TextBox';
-import Sprites from '../components/Sprites';
 import DialogueBox from '../components/DialogueBox';
 // import list arrays
 import insultList from '../insultList';
 import lameResponses from '../lameResponses';
 // import assets
-import scummBar from '../music/scumm-bar.mp3';
-import spritesStatic from '../images/sprites_static.png'
-import spritesFighting from '../images/sprites_fighting.mp4';
+import spritesStatic from '../images/sprites_static.png';
+import guybrushTalk from '../images/guybrush-talk.gif';
+import pirateTalk from '../images/pirate-talk.gif';
+import spritesFighting from '../images/sword-fighting.gif';
 
 
-const wait = ms => {
+export const wait = ms => {
    return new Promise(resolve => {
         setTimeout(() => {
             resolve();
@@ -24,7 +24,6 @@ const wait = ms => {
 
 const PlayScreen = ({winner, setWinner}) => {
 
-    const [menuScreen, setMenuScreen] = useState('');
     const [gameStart, setGameStart] = useState(false);
     const [message, setMessage] = useState('');
     const [playerTurn, setPlayerTurn] = useState(true);
@@ -34,23 +33,31 @@ const PlayScreen = ({winner, setWinner}) => {
     const [dialogue, setDialogue] = useState([]);
     const [playerScore, setPlayerScore] = useState(0);
     const [opponentScore, setOpponentScore] = useState(0);
-    const [animation, setAnimation] = useState(spritesFighting)
+    const [animation, setAnimation] = useState(null);
+    const [menuScreen, setMenuScreen] = useState('');
 
 
     const openingSequence = async () => {
         setMessage('Oh jeez, not you again!');
+        setAnimation(guybrushTalk);
         await wait(2500)
 
+        setAnimation(spritesStatic);
         setPlayerTurn(false);
         setMessage('You were expecting someone else?');
+        setAnimation(pirateTalk);
         await wait(2500)
 
+        setAnimation(spritesStatic);
         setMessage('');
         setGameStart(true);
         await wait(100);
 
         setPlayerTurn(true);
     };
+
+
+
 
     useEffect(()=> {
         if(gameStart) {
@@ -63,6 +70,8 @@ const PlayScreen = ({winner, setWinner}) => {
             }
         };
     }, [playerTurn]);
+
+
 
 
     const playerAction = () => {
@@ -82,9 +91,9 @@ const PlayScreen = ({winner, setWinner}) => {
 
            for(let i = 0; dialogueArray.length < 4; i++) {
                 let wrongResponse = insultList[Math.floor(Math.random()*insultList.length)].response;
-                if(wrongResponse !== correctResponse) {
+                if(wrongResponse != correctResponse) {
                     dialogueArray.push(wrongResponse);
-                }
+                };
             };
 
             dialogueArray.sort();
@@ -95,15 +104,23 @@ const PlayScreen = ({winner, setWinner}) => {
         setDialogue(dialogueOptions);
     };
 
+
+
     const handleClick = async (e) => {
         setDialogue([])
         setMessage(e.target.innerHTML);
         currentInsult
             ? setCurrentResponse(e.target.innerHTML)
             : setCurrentInsult(e.target.innerHTML)
+        setAnimation(guybrushTalk);
+        await wait(2500);
+        setAnimation(spritesStatic);
     };
 
-    const opponentAction = () => {
+
+
+
+    const opponentAction = async () => {
 
         // Opponent attacks
         if(!currentInsult) { 
@@ -121,7 +138,13 @@ const PlayScreen = ({winner, setWinner}) => {
             setMessage(opponentResponse);
             setCurrentResponse(opponentResponse);
         }
+
+        setAnimation(pirateTalk);
+        await wait(2500);
+        setAnimation(spritesStatic);
     };
+
+
 
     // Automatically get correct response for future response comparison
     useEffect(()=> {
@@ -135,23 +158,32 @@ const PlayScreen = ({winner, setWinner}) => {
     }, [currentInsult]);
 
 
+
+
     // Find round / game winner
     useEffect(()=> {
         if (currentResponse) {
-            setTimeout(()=>{
+            setTimeout(()=> {
+                setAnimation(spritesFighting);
+            }, 2500);
+    
+            setTimeout(()=> {
+                setAnimation(spritesStatic);
                 // Player wins if they guess correct or pirate guesses wrong
                 if (currentResponse === correctResponse && playerTurn === true
                     || currentResponse !== correctResponse && playerTurn === false) {
                         setWinner(true);
                         setPlayerScore(playerScore + 1);
-
+    
                 } else {  // else pirate wins
                     setWinner(false);
                     setOpponentScore(opponentScore + 1); 
                 }
-            }, 2500);
-        };
+            }, 5000);
+        }
     }, [currentResponse]);
+
+
 
 
     useEffect(()=> {
@@ -167,6 +199,8 @@ const PlayScreen = ({winner, setWinner}) => {
     }, [playerScore, opponentScore]);
 
     
+
+
     const newRound = async () => {
         setCurrentInsult(null);
         setCurrentResponse(null);
@@ -180,10 +214,10 @@ const PlayScreen = ({winner, setWinner}) => {
         setWinner(null);
     };
 
+
+
     useEffect(()=> {
         openingSequence();
-        let music = new Audio(scummBar).play();
-        music.loop = true;
     }, []);
 
 
@@ -192,6 +226,7 @@ const PlayScreen = ({winner, setWinner}) => {
             <MenuScreen 
                 menuScreen={menuScreen} 
                 setMenuScreen={setMenuScreen}
+                playerScore={playerScore}
             />
             <IconMenu 
                 menuScreen={menuScreen} 
@@ -203,8 +238,9 @@ const PlayScreen = ({winner, setWinner}) => {
                         playerTurn={playerTurn}
                         message={message}
                     />
-                    <Sprites 
-                        animation={animation}
+                    <img
+                        src={animation}
+                        alt='Guybrush and pirate sprites'
                     />
                 </div>
                 <DialogueBox

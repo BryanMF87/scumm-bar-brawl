@@ -13,16 +13,9 @@ const App = () => {
   return (
     <>
       <div className='content'>
-        <MenuScreen 
-          winner={winner}
-        />
-        {screen === 'start' && (<StartScreen 
-          onStartClick={() => setScreen('play')}
-        />)}
-        {screen === 'play' && <PlayScreen
-          winner={winner}
-          setWinner={setWinner}
-        />}
+        <MenuScreen/>
+        {screen === 'start' && (<StartScreen onStartClick={() => setScreen('play')}/>)}
+        {screen === 'play' && <PlayScreen winner={winner} setWinner={setWinner}/>}
       </div>
     </>
   );
