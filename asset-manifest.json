@@ -1,21 +1,23 @@
 {
   "files": {
     "main.css": "/static/css/main.65f0fe10.css",
-    "main.js": "/static/js/main.39c0b968.js",
+    "main.js": "/static/js/main.09de28a4.js",
     "static/media/pirate-talk.gif": "/static/media/pirate-talk.99b84b886453f7d5f9a9.gif",
     "static/media/guybrush-talk.gif": "/static/media/guybrush-talk.11a960923eb45b4a58e7.gif",
     "static/media/sword-fighting.gif": "/static/media/sword-fighting.988e9ba3cac350b09743.gif",
     "static/media/bar-inside.png": "/static/media/bar-inside.4fa0bec906db93fe375f.png",
+    "static/media/guybrush-loses.gif": "/static/media/guybrush-loses.f5297b02dec6def94a09.gif",
+    "static/media/pirate-loses.gif": "/static/media/pirate-loses.72ec03c8d29219ecae0d.gif",
     "static/media/bar-outside.jpg": "/static/media/bar-outside.0e5281af25d9180ba511.jpg",
     "static/media/logo.png": "/static/media/logo.b28334baa41139fa003c.png",
     "static/media/sprites_static.png": "/static/media/sprites_static.97a7bb26f7fa42cf7718.png",
     "static/media/ONESIZE_.TTF": "/static/media/ONESIZE_.f91aec86ba64dfaa3d2c.TTF",
     "index.html": "/index.html",
     "main.65f0fe10.css.map": "/static/css/main.65f0fe10.css.map",
-    "main.39c0b968.js.map": "/static/js/main.39c0b968.js.map"
+    "main.09de28a4.js.map": "/static/js/main.09de28a4.js.map"
   },
   "entrypoints": [
     "static/css/main.65f0fe10.css",
-    "static/js/main.39c0b968.js"
+    "static/js/main.09de28a4.js"
   ]
 }
