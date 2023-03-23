@@ -12,6 +12,8 @@ import spritesStatic from '../images/sprites_static.png';
 import guybrushTalk from '../images/guybrush-talk.gif';
 import pirateTalk from '../images/pirate-talk.gif';
 import spritesFighting from '../images/sword-fighting.gif';
+import guybrushLoses from '../images/guybrush-loses.gif';
+import pirateLoses from '../images/pirate-loses.gif';
 
 
 export const wait = ms => {
@@ -189,9 +191,15 @@ const PlayScreen = ({winner, setWinner, menuScreen, setMenuScreen}) => {
     useEffect(()=> {
         if(playerScore > 0 || opponentScore > 0) {
             if(playerScore === 3) {
-                setMenuScreen('win')
+                setAnimation(pirateLoses);
+                setTimeout(()=> {
+                    setMenuScreen('win')
+                }, 2500);
             } else if (opponentScore === 3) {
-                setMenuScreen('win')
+                setAnimation(guybrushLoses);
+                setTimeout(()=> {
+                    setMenuScreen('win')
+                }, 2500);
             } else {
                 newRound();
             };
