@@ -82,7 +82,7 @@ const insultList = [
     },
     {
         insult: `I hope you have a boat ready for a quick escape.`,
-        response: `Why, did you want to borrow one?`
+        response: `Why? Did you want to borrow one?`
     },
 ]
 

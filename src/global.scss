@@ -3,6 +3,7 @@
     src: url(./fonts/ONESIZE_.TTF) format('truetype');
 }
 
+// custom color variables
 $miLightPurple: #D99CFF;
 $miDarkPurple: #A55A9F;
 $miGreen: #62C859;
@@ -11,6 +12,7 @@ $miYellow: #F9B53B;
 
 :root {
     font-family: 'onesize', sans-serif;
+    font-size: 1rem;
 
     * {
         box-sizing: border-box;
@@ -36,7 +38,10 @@ $miYellow: #F9B53B;
         &:hover {
             background: $miYellow;
         }
+    }
 
+    p {
+        margin: 0;
     }
 }
 
@@ -47,10 +52,6 @@ $miYellow: #F9B53B;
     background-size: cover;
     width: 100%;
     height: 100vh;
-
-    p {
-        text-align: center;
-    }
 }
 
 .sidebar {
@@ -59,43 +60,46 @@ $miYellow: #F9B53B;
     left: 0;
     bottom: 0;
     background:rgba(0, 0, 0, 0.5);
-    width: 40%;
     color: white;
-    padding: 2.5rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-content: center;
 
     .logo {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-content: center;
+        justify-content: center;
 
         img {
-            max-width: 100%;
+            width: 90%;
             margin: 0 auto;
-            flex: 1;
         }
     }
 
-    .button-n-text {
+    button {
+        display: flex;
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+    }
+
+    div:nth-of-type(2) {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-
-        button {
-            display: flex;
-            justify-self: center;
-            align-self: center;
-        }
-
-        p {
-            max-width: 300px;
-            margin: 1.5rem auto 0 auto;
-        }
+        gap: 1rem;
+        text-align: center;
     }
 }
 
-
-// PlayScreen styling
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 
 .icon-menu {
     position: absolute;
@@ -109,7 +113,7 @@ $miYellow: #F9B53B;
     margin: 0;
 
     li {
-        font-size: large;
+        font-size: 1rem;
 
         &:hover {
             color: $miLightPurple;
@@ -117,42 +121,58 @@ $miYellow: #F9B53B;
     }
 }
 
-.wrapper {
+.quit-screen, .info-screen, .credits-screen, .win-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    text-align: center;
+    z-index: 1000;
+}
+
+.quit-screen {
+    h1 {
+        max-width: 80%;
+        margin: 0 auto 1rem auto;
+    }
+
+    .quit-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+.info-screen {
+    padding: 2rem;
+
+    p {
+        max-width: 600px;
+        margin-bottom: 1.5rem;
+    }
 }
 
 .character-section {
     background-image: url('./images/bar-inside.png');
     background-repeat: no-repeat;
-    background-size: 230%;
-    background-position: 10% 80%;
     width: 100%;
     height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
-    img {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        object-fit: contain;
-        width: 55%;
-        margin-bottom: -.5rem;
-    }
 }
 
 .text-box {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 50%;
     transform: translateY(-80%) translateX(-50%);
     text-align: center;
-    font-size: 4.5vh;
-    max-width: 60%;
-    margin: 0 auto 10px auto;
     text-shadow:    2px 2px 0 #000,
                     -2px -2px 0 #000,
                     -2px 2px 0 #000,
@@ -171,76 +191,18 @@ $miYellow: #F9B53B;
     background: black;
     color: $miDarkPurple;
     width: 100%;
-    height: 30%;
-    font-size: 4.5vh;
     display: flex;
-    align-items: center;
 
     ul {
         margin: 0;
-        padding: 0 0 0 2rem;
         display: flex;
         flex-direction: column;
-        gap: 5px;
-    }
-
-    li {
-        display: flex;
-        gap: 10px;
-
-        &:hover {
-            cursor: pointer;
-            color: $miLightPurple;
-        }
-    }
-}
-
-
-
-// MenuScreen stylings
-
-.intro-screen, .quit-screen, .info-screen, .credits-screen, .win-screen, .error-screen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: white;
-    text-align: center;
-    z-index: 1000;
-}
-
-.intro-screen {
-    background-color: rgba(0, 0, 0);
-
-    h2 {
-        max-width: 70%;
-    }
-}
-
-.quit-screen {
-    h1 {
-        max-width: 80%;
-        margin: 0 auto 1rem auto;
-    }
-
-    .quit-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-    }
-}
-
-.info-screen {
-    p {
-        max-width: 600px;
+        justify-content: space-around;
     }
 }
 
 .credits-screen {
+    padding: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,6 +229,204 @@ $miYellow: #F9B53B;
     }
 }
 
+.win-screen {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
 .error-screen {
     padding: 0 2rem;
+}
+
+
+
+
+
+/* Styling for horizontal layout */
+
+@media screen and (orientation: landscape) {
+    .start-screen {
+        background-position: bottom;
+    }
+
+    .sidebar {
+        width: 40%;
+        padding: 1rem;
+    }
+
+    .character-section {
+        background-size: 230%;
+        background-position: 10% 80%;
+        font-size: 4.5vh;
+
+        img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            object-fit: contain;
+            width: 55%;
+            margin-bottom: -.5rem;
+        }
+    }
+
+    .text-box {
+        max-width: 60%;
+        margin: 0 auto;
+    }
+
+    .dialogue-box {
+        height: 30%;
+        align-items: center;
+
+        ul {
+            padding: .5rem 0 .5rem 1.25rem;
+            height: 100%;
+        }
+
+        li:hover {
+            cursor: pointer;
+            color: $miLightPurple;
+        }
+    }
+
+
+    @media screen and (min-height: 600px) {
+        .sidebar {
+            padding: 2rem;
+            
+            .logo p  {
+                font-size: 1.25rem;
+            }
+        }
+
+        .wrapper {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media screen and (min-height: 768px) {
+        .wrapper {
+            font-size: 1.75rem;
+        }
+
+        .text-box {
+            top: 10rem;
+        }
+
+        .dialogue-box ul {
+            padding-left: 2rem;
+        }
+    }
+
+    @media screen and (min-height: 900px) {
+        .wrapper {
+            font-size: 2rem;
+        }
+    }
+}
+
+
+
+
+
+
+
+/* Styling for vertical layouts */
+
+@media screen and (orientation: portrait) {
+    .start-screen {
+        background-position: bottom right;
+    }
+    
+    .sidebar {
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+    .wrapper {
+        font-size: 1.35rem;
+    }
+    
+    .character-section {
+        background-size: 500%;
+        background-position: 25% 75%;
+        overflow: hidden;
+    
+        img {
+            width: 125%;
+            margin-left: -12.5%;
+            margin-bottom: -1rem;
+        }
+    }
+
+    .text-box {
+        width: 90%;
+        transform: translateY(-80%) translateX(-50%);
+    }
+
+    
+    .dialogue-box {
+        height: 50%;
+        align-items: top;
+    
+        ul {
+            padding: 0 1rem;
+        }
+    
+        li:hover {
+            cursor: pointer;
+            color: $miLightPurple;
+        }
+    }
+
+
+    @media screen and (min-height: 768px) {
+        .icon-menu li {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media screen and (min-width: 400px) {
+        .wrapper {
+            font-size: 1.5rem;
+        }
+    }
+
+
+    @media screen and (min-width: 768px){
+        .sidebar {
+            padding: 4rem 2rem;
+
+            p, button {
+                font-size: 4vw;
+            }
+        }
+
+        .wrapper {
+            font-size: 2.5rem;
+        }
+
+        .character-section {
+            background-size: 400%;
+            background-position: 25% 85%;
+
+            img {
+                width: 100%;
+                margin: 0 auto -2rem auto;
+            }
+        }
+
+        .icon-menu li {
+            font-size: 1.5rem;
+        }
+
+        .dialogue-box {
+            padding: 0 1rem;
+        }
+    }
+
+    @media screen and (min-width: 900px){
+        .wrapper {
+            font-size: 2.75rem;
+        }
+    }
 }

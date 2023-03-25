@@ -24,8 +24,9 @@ export const wait = ms => {
     });
 }
 
-const PlayScreen = ({winner, setWinner, menuScreen, setMenuScreen}) => {
+const PlayScreen = ({winner, setWinner}) => {
 
+    const [menuScreen, setMenuScreen] = useState('');
     const [gameStart, setGameStart] = useState(false);
     const [message, setMessage] = useState('');
     const [playerTurn, setPlayerTurn] = useState(true);
@@ -93,7 +94,7 @@ const PlayScreen = ({winner, setWinner, menuScreen, setMenuScreen}) => {
 
            for(let i = 0; dialogueArray.length < 4; i++) {
                 let wrongResponse = insultList[Math.floor(Math.random()*insultList.length)].response;
-                if(wrongResponse != correctResponse) {
+                if(!dialogueArray.includes(wrongResponse)) {
                     dialogueArray.push(wrongResponse);
                 };
             };
