@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/scumm-bar-brawl/static/css/main.fc85043c.css",
+    "main.css": "/scumm-bar-brawl/static/css/main.25988e23.css",
     "main.js": "/scumm-bar-brawl/static/js/main.4c4c32f6.js",
     "static/media/pirate-talk.gif": "/scumm-bar-brawl/static/media/pirate-talk.99b84b886453f7d5f9a9.gif",
     "static/media/guybrush-talk.gif": "/scumm-bar-brawl/static/media/guybrush-talk.11a960923eb45b4a58e7.gif",
@@ -13,11 +13,11 @@
     "static/media/sprites_static.png": "/scumm-bar-brawl/static/media/sprites_static.97a7bb26f7fa42cf7718.png",
     "static/media/ONESIZE_.TTF": "/scumm-bar-brawl/static/media/ONESIZE_.f91aec86ba64dfaa3d2c.TTF",
     "index.html": "/scumm-bar-brawl/index.html",
-    "main.fc85043c.css.map": "/scumm-bar-brawl/static/css/main.fc85043c.css.map",
+    "main.25988e23.css.map": "/scumm-bar-brawl/static/css/main.25988e23.css.map",
     "main.4c4c32f6.js.map": "/scumm-bar-brawl/static/js/main.4c4c32f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc85043c.css",
+    "static/css/main.25988e23.css",
     "static/js/main.4c4c32f6.js"
   ]
 }
