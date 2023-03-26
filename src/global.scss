@@ -13,36 +13,41 @@ $miYellow: #F9B53B;
 :root {
     font-family: 'onesize', sans-serif;
     font-size: 1rem;
+}
 
-    * {
-        box-sizing: border-box;
+body {
+    width: 100%;
+    height: 100vh;
+};
+
+* {
+    box-sizing: border-box;
+}
+
+a, a:visited, a:link {
+    color: $miYellow;
+
+    &:hover, &:focus {
+        color: $miRed;
     }
+}
 
-    a, a:visited, a:link {
-        color: $miYellow;
+li {
+    list-style: none;
+}
 
-        &:hover, &:focus {
-            color: $miRed;
-        }
+button {
+    color: white;
+    background: $miRed;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    &:hover {
+        background: $miYellow;
     }
+}
 
-    li {
-        list-style: none;
-    }
-
-    button {
-        color: white;
-        background: $miRed;
-        padding: .5rem 1rem;
-        border-radius: .5rem;
-        &:hover {
-            background: $miYellow;
-        }
-    }
-
-    p {
-        margin: 0;
-    }
+p {
+    margin: 0;
 }
 
 .start-screen {
