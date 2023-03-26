@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './global.scss';
 // import components
 import StartScreen from './pages/StartScreen';
@@ -8,11 +8,12 @@ const App = () => {
   
   const [screen, setScreen] = useState('start');
   const [winner, setWinner] = useState(null);
+  const [fade, setFade] = useState(false);
 
   return (
-    <div className='content'>
-      {screen === 'start' && <StartScreen onStartClick={() => setScreen('play')} />}
-      {screen === 'play' && <PlayScreen winner={winner} setWinner={setWinner} />}
+    <div className='content' style={{opacity: fade ? '0%' : '100%'}}>
+      {screen === 'start' && <StartScreen setScreen={setScreen} fade={fade} setFade={setFade}/>}
+      {screen === 'play' && <PlayScreen winner={winner} setFade={setFade} setWinner={setWinner} />}
     </div>
   );
 }

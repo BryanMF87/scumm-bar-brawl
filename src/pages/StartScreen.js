@@ -1,15 +1,22 @@
-import React, {useRef} from 'react';
+import React from 'react';
 // import assets
 import logo from '../images/logo.png';
 
-const StartScreen = ({onStartClick}) => {
+const StartScreen = ({setScreen, fade, setFade}) => {
 
-    const sidebarRef = useRef(null);
+    const sidebar = document.querySelector('.sidebar');
+
+    const onStartClick = () => {
+        setFade(true)
+        setTimeout(()=>{
+            setScreen('play')
+        },3000)
+    };
 
     return (
         <>
             <div className='start-screen'>
-                <div className='sidebar' ref={sidebarRef}>
+                <div className='sidebar' style={{opacity: fade ? '0%' : '100%'}}>
                     <div className='logo'>
                         <p>Scumm Bar Brawl</p>
                         <img src={logo} alt="The Secret of Monkey Island"/>

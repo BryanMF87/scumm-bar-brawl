@@ -24,7 +24,7 @@ export const wait = ms => {
     });
 }
 
-const PlayScreen = ({winner, setWinner}) => {
+const PlayScreen = ({setFade, winner, setWinner}) => {
 
     const [menuScreen, setMenuScreen] = useState('');
     const [gameStart, setGameStart] = useState(false);
@@ -41,6 +41,9 @@ const PlayScreen = ({winner, setWinner}) => {
 
 
     const openingSequence = async () => {
+        setAnimation(spritesStatic)
+        await wait(2000)
+
         setMessage('Oh jeez, not you again!');
         setAnimation(guybrushTalk);
         await wait(2500)
@@ -226,6 +229,7 @@ const PlayScreen = ({winner, setWinner}) => {
 
 
     useEffect(()=> {
+        setFade(false);
         openingSequence();
     }, []);
 
