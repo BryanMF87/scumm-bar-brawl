@@ -52,7 +52,7 @@ p {
 }
 
 .content {
-    transition: 2s ease;
+    transition: opacity 1s ease;
     position: relative;
     width: 100%;
     height: 100vh;
@@ -79,7 +79,7 @@ p {
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
-    transition: 2s ease;
+    transition: opacity 1s ease;
 
     .logo {
         display: flex;
@@ -123,8 +123,10 @@ p {
     flex-direction: row;
     gap: 20px;
     color: white;
-    padding: 0;
+    padding: .75rem 1rem .5rem 1rem;
     margin: 0;
+    border-radius: .5rem;
+    background:rgba(0, 0, 0, 0.75);
 
     li {
         font-size: 1rem;
@@ -183,9 +185,9 @@ p {
 
 .text-box {
     position: absolute;
-    top: 20%;
+    top: 25%;
     left: 50%;
-    transform: translateY(-80%) translateX(-50%);
+    transform: translateY(-75%) translateX(-50%);
     text-align: center;
     text-shadow:    2px 2px 0 #000,
                     -2px -2px 0 #000,
@@ -374,7 +376,6 @@ p {
 
     .text-box {
         width: 90%;
-        transform: translateY(-80%) translateX(-50%);
     }
 
     

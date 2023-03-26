@@ -10,7 +10,7 @@ const StartScreen = ({setScreen, fade, setFade}) => {
         setFade(true)
         setTimeout(()=>{
             setScreen('play')
-        },3000)
+        }, 1000)
     };
 
     return (
