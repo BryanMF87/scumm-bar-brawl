@@ -77,7 +77,8 @@ p {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1.5rem;
     align-content: center;
     transition: opacity 1s ease;
 
@@ -106,6 +107,11 @@ p {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+
+    .disclaimer {
+        max-width: 19.375rem;
+        margin: 0 auto;
     }
 }
 

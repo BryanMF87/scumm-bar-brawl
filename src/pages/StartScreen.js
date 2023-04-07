@@ -4,8 +4,6 @@ import logo from '../images/logo.png';
 
 const StartScreen = ({setScreen, fade, setFade}) => {
 
-    const sidebar = document.querySelector('.sidebar');
-
     const onStartClick = () => {
         setFade(true)
         setTimeout(()=>{
@@ -23,7 +21,7 @@ const StartScreen = ({setScreen, fade, setFade}) => {
                     </div>
                     <div>
                         <button onClick={ onStartClick }>Start Game</button>
-                        <p>Monkey Island is a Lucas Arts trademark series. This is just a fan-made game.</p>
+                        <p className="disclaimer">Monkey Island is a Lucas Arts trademark series. This is just a fan-made game.</p>
                     </div>
                 </div>
             </div>
