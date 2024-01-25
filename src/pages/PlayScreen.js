@@ -176,8 +176,8 @@ const PlayScreen = ({setFade, winner, setWinner}) => {
             setTimeout(()=> {
                 setAnimation(spritesStatic);
                 // Player wins if they guess correct or pirate guesses wrong
-                if (currentResponse === correctResponse && playerTurn === true
-                    || currentResponse !== correctResponse && playerTurn === false) {
+                if ((currentResponse === correctResponse) && (playerTurn === true)
+                    || (currentResponse !== correctResponse) && (playerTurn === false)) {
                         setWinner(true);
                         setPlayerScore(playerScore + 1);
     
