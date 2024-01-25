@@ -1,7 +1,6 @@
 {
-  "homepage": "http://BryanMF87.github.io/scumm-bar-brawl",
   "name": "scrumm-bar-brawl",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@react-spring/web": "^9.5.5",
@@ -50,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.23.4",
     "css-loader": "^6.7.2",
     "gh-pages": "^5.0.0",
     "postcss-normalize": "^10.0.1",
